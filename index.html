@@ -695,31 +695,6 @@
     color: var(--white);
   }
 
-  .nav-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(4px);
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 10;
-    transition: background 0.2s ease, opacity 0.2s ease;
-  }
-  .nav-btn:hover { background: rgba(255,255,255,0.28); }
-  .nav-btn:disabled { opacity: 0; pointer-events: none; }
-
-  .nav-btn.prev { left: 12px; }
-  .nav-btn.next { right: 12px; }
-
-  .nav-btn svg { width: 20px; height: 20px; }
-
   .page-counter {
     position: absolute;
     bottom: 16px;
@@ -1110,13 +1085,6 @@ u did a veryyyy great job today, tomorrow, yesterday, and simply just everyday. 
       </div>
     </div>
 
-    <button class="nav-btn prev" id="prevBtn" aria-label="Previous page">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-    <button class="nav-btn next" id="nextBtn" aria-label="Next page">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-
     <div class="page-counter" id="pageCounter">1 / 11</div>
   </div>
 
@@ -1125,8 +1093,6 @@ u did a veryyyy great job today, tomorrow, yesterday, and simply just everyday. 
   const totalPages = pages.length;
   let currentPage = 1;
 
-  const prevBtn = document.getElementById("prevBtn");
-  const nextBtn = document.getElementById("nextBtn");
   const pageCounter = document.getElementById("pageCounter");
   const progressFill = document.getElementById("progressFill");
   const progressTrack = document.querySelector(".progress-track");
@@ -1137,8 +1103,6 @@ u did a veryyyy great job today, tomorrow, yesterday, and simply just everyday. 
 
     pages.forEach(p => p.classList.toggle("active", Number(p.dataset.page) === n));
 
-    prevBtn.disabled = n === 1;
-    nextBtn.disabled = n === totalPages;
     pageCounter.textContent = n + " / " + totalPages;
 
     if (n === 1) {
@@ -1149,9 +1113,6 @@ u did a veryyyy great job today, tomorrow, yesterday, and simply just everyday. 
       clearTimeout(window.__storyTimer);
     }
   }
-
-  prevBtn.addEventListener("click", () => goToPage(currentPage - 1));
-  nextBtn.addEventListener("click", () => goToPage(currentPage + 1));
 
   const line1El = document.getElementById("line1");
   const line2El = document.getElementById("line2");
